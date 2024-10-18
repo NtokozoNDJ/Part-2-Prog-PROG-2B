@@ -1,0 +1,113 @@
+﻿<Window x:Class="Part_2_Prog.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Contract Monthly Claim System" Height="450" Width="650" 
+        Background="#0C0C0C" Foreground="White" FontFamily="Segoe UI" FontSize="14">
+
+    <!-- Define Some Styles for Buttons, Text, and Tabs -->
+    <Window.Resources>
+        <!-- Button Styling -->
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#1E90FF"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="10,5"/>
+            <Setter Property="Padding" Value="5,10"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="MinWidth" Value="120"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
+        <!-- ListView Styling -->
+        <Style TargetType="ListView">
+            <Setter Property="Background" Value="#2E2E2E"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Margin" Value="0,10,0,10"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+
+        <!-- TextBlock Styling -->
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#1E90FF"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <!-- Tab Control for Different Sections -->
+        <TabControl Background="#0C0C0C" BorderBrush="Transparent">
+
+            <!-- Tab 1: Submit Claim -->
+            <TabItem Header="Submit Claim" Foreground="#1E90FF">
+                <Grid Margin="20">
+                    <StackPanel>
+                        <TextBlock Text="Submit a Claim" HorizontalAlignment="Center"/>
+
+                        <TextBlock Text="Hours Worked:" HorizontalAlignment="Left"/>
+                        <TextBox x:Name="HoursWorkedTextBox" Background="#2E2E2E" Foreground="White" Height="30"/>
+
+                        <TextBlock Text="Hourly Rate:" HorizontalAlignment="Left"/>
+                        <TextBox x:Name="HourlyRateTextBox" Background="#2E2E2E" Foreground="White" Height="30"/>
+
+                        <TextBlock Text="Supporting Documents (Optional):" HorizontalAlignment="Left"/>
+                        <Button Content="Browse File" Click="BrowseButton_Click"/>
+
+                        <TextBlock x:Name="FileNameTextBlock" Text="No file selected" FontStyle="Italic" Foreground="Gray"/>
+
+                        <Button Content="Submit Claim" Click="SubmitClaimButton_Click"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <!-- Tab 2: Approve Claims -->
+            <TabItem Header="Approve Claims" Foreground="#1E90FF">
+                <Grid Margin="20">
+                    <StackPanel>
+                        <TextBlock Text="Pending Claims" HorizontalAlignment="Center"/>
+
+                        <ListView x:Name="PendingClaimsListView" Height="200">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Claim ID" DisplayMemberBinding="{Binding ClaimID}" Width="100"/>
+                                    <GridViewColumn Header="Hours Worked" DisplayMemberBinding="{Binding HoursWorked}" Width="100"/>
+                                    <GridViewColumn Header="Total Amount" DisplayMemberBinding="{Binding TotalAmount}" Width="100"/>
+                                    <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="100"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+
+                        <Button Content="Refresh" Click="LoadPendingClaims"/>
+                        <Button Content="Approve Selected" Click="ApproveClaim_Click"/>
+                        <Button Content="Reject Selected" Click="RejectClaim_Click" Background="#FF4500"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <!-- Tab 3: Claim Status -->
+            <TabItem Header="Claim Status" Foreground="#1E90FF">
+                <Grid Margin="20">
+                    <StackPanel>
+                        <TextBlock Text="Your Claims" HorizontalAlignment="Center"/>
+
+                        <ListView x:Name="ClaimStatusListView" Height="200">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Claim ID" DisplayMemberBinding="{Binding ClaimID}" Width="100"/>
+                                    <GridViewColumn Header="Hours Worked" DisplayMemberBinding="{Binding HoursWorked}" Width="100"/>
+                                    <GridViewColumn Header="Total Amount" DisplayMemberBinding="{Binding TotalAmount}" Width="100"/>
+                                    <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="100"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+
+                        <Button Content="Refresh" Click="LoadClaimStatuses"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
