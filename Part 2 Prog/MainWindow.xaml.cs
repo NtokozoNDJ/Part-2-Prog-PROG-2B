@@ -73,7 +73,7 @@ namespace Part_2_Prog.Views
         {
             if (PendingClaimsListView.SelectedItem is Part_2_Prog.Models.Claim selectedClaim)
             {
-                _dataService.RejectClaim(selectedClaim.ClaimID, 2);  
+                _dataService.RejectClaim(selectedClaim.ClaimID, 2);  // Assuming coordinator ID 2 is logged in
                 MessageBox.Show("Claim rejected.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 LoadPendingClaims(null, null);  // Refresh the pending claims list
             }
